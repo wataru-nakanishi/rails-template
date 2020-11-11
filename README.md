@@ -1,7 +1,7 @@
 # rails-template
 1. Create Dockerfile, Gemfile, Gemfile.lock(empty), entrypoint.sh, docker-compose.yml
 1. generate the Rails skeleton app  
-` docker-compose run --no-deps web rails new . --force --database=postgresql `
+` docker-compose run --no-deps web rails new . --force --database=postgresql --api `
 1. Build docker image  
 ` docker-compose build `
 1. Change root user plugin  
