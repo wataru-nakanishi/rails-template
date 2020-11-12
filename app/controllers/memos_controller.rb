@@ -1,4 +1,6 @@
 class MemosController < ApplicationController
+  include ActionController::HttpAuthentication::Token::ControllerMethods
+  before_action :authenticate
   before_action :set_memo, only: [:show, :update, :destroy]
 
   # GET /memos
@@ -38,6 +40,13 @@ class MemosController < ApplicationController
     @memo.destroy
   end
 
+  def authenticate
+    authenticate_or_request_with_http_token do |token,options|
+      auth_user = User.find_by(token: token)
+      auth_user != nil ? true : false
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_memo
@@ -48,4 +57,5 @@ class MemosController < ApplicationController
     def memo_params
       params.require(:memo).permit(:title, :content)
     end
+  end
 end
