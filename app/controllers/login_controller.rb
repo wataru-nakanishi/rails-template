@@ -4,7 +4,7 @@ class LoginController < ApplicationController
     if login_user && login_user.authenticate(params[:password])
       render plain: login_user.token
     else
-      render plain: 'no auth'
+      render status: 401, json: { status: 401, message: 'Unauthorized' }
     end
   end
 end
